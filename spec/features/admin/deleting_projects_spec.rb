@@ -1,6 +1,10 @@
 require "rails_helper"
 
 feature "Deleting projects" do
+  before do
+    login_as(FactoryGirl.create(:user, :admin))
+  end
+  
   scenario "Deleting a project" do
     FactoryGirl.create(:project, name: "Sublime Text 3")
 
