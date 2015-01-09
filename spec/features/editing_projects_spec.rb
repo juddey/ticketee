@@ -5,7 +5,7 @@ feature "Editing Projects" do
   let (:project) { FactoryGirl.create(:project, name: "Sublime Text 3") }
 
   before do
-    assign_role!(user, :viewer, project)
+    assign_role!(user, :manager, project)
     login_as(user)
     visit "/"
     click_link "Sublime Text 3"
