@@ -9,7 +9,7 @@ require "rails_helper"
 
     before do
       login_as(user)
-      assign_role!(user, :viewer, project)
+      assign_role!(user, :manager, project)
       visit project_ticket_path(project, ticket)
       click_link "Edit Ticket"
     end
