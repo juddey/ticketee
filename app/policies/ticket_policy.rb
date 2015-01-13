@@ -5,6 +5,9 @@ class TicketPolicy < ApplicationPolicy
   def create?
     user.try(:admin?) || record.project.has_manager?(user) || record.project.has_editor?(user)
   end
+  def destroy?
+    user.try(:admin?) || record.project.has_manager?(user)
+  end
   class Scope < Scope
     def resolve
       scope
