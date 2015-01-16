@@ -8,3 +8,17 @@
     class: "delete" %></li>
   </ul>      
 </div>
+
+<div class="page-header">
+  <h2>Roles</h2>
+</div>
+
+  <% if @user.roles.any? %>
+    <ul>
+      <% @user.roles.each do |role| %>
+        <li><%= role.project.name %>: <%= role.role.titleize %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>This user has no roles.</p>
+  <% end %>
