@@ -3,7 +3,6 @@ require "rails_helper"
 feature "Creating tickets" do
   let(:user) { FactoryGirl.create(:user) }
 
-
   before do
     login_as(user)
     project = FactoryGirl.create(:project, name: "Internet Explorer")
