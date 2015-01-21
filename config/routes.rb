@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :assets, only: [:show], path: :files
+  resources :assets, only: [:show, :new], path: :files
 
   namespace :admin do
     root "base#index"
