@@ -1,0 +1,8 @@
+<blockquuote class="comment">
+
+  <%= simple_format(comment.text) %>
+    <footer>
+      <%= time_ago_in_words(comment.created_at) %> ago
+      by <cite><%= comment.author %></cite>
+    </footer>
+</blockquuote>
