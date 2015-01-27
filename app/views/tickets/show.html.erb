@@ -7,6 +7,9 @@
       <p id="author">
         Created by <%= @ticket.author.email %>, <% time_ago_in_words(@ticket.created_at) %>
         </p>
+        <% if @ticket.state.present? %>
+          <p><strong>State:</strong> <%= render @ticket.state %> </p>
+        <% end %>
       <ul> class="actions"
         <% if policy(@ticket).update? %>
           <li><%= link_to "Edit Ticket", [:edit, @project, @ticket], 

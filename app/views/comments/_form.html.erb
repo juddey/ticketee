@@ -4,5 +4,6 @@
 
 <%= simple_form_for [ticket, comment] do |f| %>
   <%= f.input :text %>
+  <%= f.association :state, selected: ticket.state_id %>
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>
