@@ -4,9 +4,9 @@ module TicketsHelper
       content_tag(:p) do
         value = "&raquo; state changed "
         if comment.previous_state.present?
-          value += "from #{render comment.previous_state} "
+          value += "from #{ comment.previous_state } "
         end
-        value += "to #{ render comment.state }"
+        value += "to #{ comment.state }"
         value.html_safe
       end
     end

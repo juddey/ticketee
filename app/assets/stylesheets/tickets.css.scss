@@ -3,4 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 blockquote.comment p {
   font-size: 14px;
-} 
+}
+.state {
+  @extend .label;
+}
+
+#tickets.li {
+  padding-bottom: 5px;
+    }
