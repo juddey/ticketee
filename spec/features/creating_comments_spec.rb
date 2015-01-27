@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "Users can comment on tickets" do
  let!(:user) { FactoryGirl.create(:user) }
  let!(:project) { FactoryGirl.create(:project) }
- let!(:ticket) { FactoryGirl.create(:ticket, 
+ let!(:ticket) { FactoryGirl.create(:ticket,
                                     project: project,
                                     author: user ) }
 
@@ -39,10 +39,13 @@ RSpec.feature "Users can comment on tickets" do
     fill_in "Text", with: "This is a real issue"
     select "Open", from: "State"
     click_button "Create Comment"
-    
+
     expect(page).to have_content("Comment has been created.")
     within("#ticket .state") do
       expect(page).to have_content "Open"
+    end
+    within("#comments") do
+      expect(page).to have_content("state changed to Open")
     end
   end
 end

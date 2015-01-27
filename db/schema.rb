@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127001934) do
+ActiveRecord::Schema.define(version: 20150127170933) do
 
-  create_table "assets", force: true do |t|
+  create_table "assets", force: :cascade do |t|
     t.string   "asset"
     t.integer  "ticket_id"
     t.datetime "created_at", null: false
@@ -22,32 +22,34 @@ ActiveRecord::Schema.define(version: 20150127001934) do
 
   add_index "assets", ["ticket_id"], name: "index_assets_on_ticket_id"
 
-  create_table "comments", force: true do |t|
+  create_table "comments", force: :cascade do |t|
     t.text     "text"
     t.integer  "ticket_id"
     t.integer  "author_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "state_id"
+    t.integer  "previous_state_id"
   end
 
   add_index "comments", ["author_id"], name: "index_comments_on_author_id"
+  add_index "comments", ["previous_state_id"], name: "index_comments_on_previous_state_id"
   add_index "comments", ["ticket_id"], name: "index_comments_on_ticket_id"
 
-  create_table "projects", force: true do |t|
+  create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  create_table "remove_asset_from_tickets", force: true do |t|
+  create_table "remove_asset_from_tickets", force: :cascade do |t|
     t.string   "asset"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "roles", force: true do |t|
+  create_table "roles", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "role"
     t.integer  "project_id"
@@ -58,13 +60,13 @@ ActiveRecord::Schema.define(version: 20150127001934) do
   add_index "roles", ["project_id"], name: "index_roles_on_project_id"
   add_index "roles", ["user_id"], name: "index_roles_on_user_id"
 
-  create_table "states", force: true do |t|
+  create_table "states", force: :cascade do |t|
     t.string "name"
     t.string "color"
     t.string "background"
   end
 
-  create_table "tickets", force: true do |t|
+  create_table "tickets", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.integer  "project_id"
@@ -76,7 +78,7 @@ ActiveRecord::Schema.define(version: 20150127001934) do
 
   add_index "tickets", ["project_id"], name: "index_tickets_on_project_id"
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
