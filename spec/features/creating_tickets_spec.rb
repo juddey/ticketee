@@ -1,6 +1,7 @@
 require "rails_helper"
 
 feature "Creating tickets" do
+  let!(:state) { FactoryGirl.create :state, name: "New", default: true }
   let(:user) { FactoryGirl.create(:user) }
 
   before do
@@ -20,6 +21,7 @@ feature "Creating tickets" do
     click_button "Create Ticket"
 
     expect(page).to have_content("Ticket has been created")
+    expect(page).to have_content("State: New")
     within("#ticket #author") do
       expect(page).to have_content("Created by #{user.email}")
     end
@@ -36,7 +38,7 @@ feature "Creating tickets" do
   scenario "with an invalid description" do
     fill_in "Title", with: "Non-standards compliance"
     fill_in "Description", with: "It sucks"
-      
+
     click_button "Create Ticket"
 
     expect(page).to have_content("Ticket has not been created.")
@@ -50,7 +52,7 @@ feature "Creating tickets" do
     attach_file "File #1", Rails.root.join("spec/fixtures/speed.txt")
     click_link "Add another file"
 
-    attach_file "File #2", Rails.root.join("spec/fixtures/spin.txt")   
+    attach_file "File #2", Rails.root.join("spec/fixtures/spin.txt")
     click_button "Create Ticket"
 
     expect(page).to have_content("Ticket has been created.")

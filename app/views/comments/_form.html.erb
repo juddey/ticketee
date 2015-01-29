@@ -4,6 +4,8 @@
 
 <%= simple_form_for [ticket, comment] do |f| %>
   <%= f.input :text %>
-  <%= f.association :state, selected: ticket.state_id %>
+  <% if policy(ticket).change_state? %>
+    <%= f.association :state, selected: ticket.state_id %>
+  <% end %>
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>

@@ -7,7 +7,11 @@ Rails.application.routes.draw do
 
     resources :projects, only: [:new, :create, :destroy]
     resources :users
-    resources :states, only: [:index, :new, :create]
+    resources :states, only: [:index, :new, :create] do
+      member do
+        get :make_default
+      end
+    end
   end
 
   devise_for :users
