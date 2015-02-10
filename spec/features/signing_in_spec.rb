@@ -14,4 +14,3 @@ feature "A user can sign in" do
     expect(page).to have_content("Signed in as #{user.email}")
   end
 end
-
