@@ -2,11 +2,11 @@
 
   <%= f.input :title %>
   <%= f.input :description %>
+  <%= render "tags/form", f: f %>
     <div id="assets">
       <h3>Supporting Files</h3>
       <%= render partial: "assets/form", locals: { f: f, index: 0 } %>
     </div>
     <p><%= link_to "Add another file", new_asset_path, remote: true, id: "add_file" %></p>
   <%= f.button :submit, class: "btn-primary" %>
-  <%= f.input :tag_names, label:  "Tags" %>
  <% end %>
