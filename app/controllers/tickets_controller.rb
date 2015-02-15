@@ -33,7 +33,7 @@ class TicketsController < ApplicationController
 
   def update
     authorize @ticket, :update?
-    
+
     if @ticket.update(ticket_params)
       flash[:notice] = "Ticket has been updated."
       redirect_to [@project, @ticket]
@@ -58,7 +58,8 @@ class TicketsController < ApplicationController
   end
 
   def ticket_params
-    params.require(:ticket).permit(:title, :description, assets_attributes: [:asset, :asset_cache])
+    params.require(:ticket).permit(:title, :description, :tag_names,
+      assets_attributes: [:asset, :asset_cache])
   end
 
   def set_ticket

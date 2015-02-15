@@ -8,4 +8,5 @@
     </div>
     <p><%= link_to "Add another file", new_asset_path, remote: true, id: "add_file" %></p>
   <%= f.button :submit, class: "btn-primary" %>
+  <%= f.input :tag_names, label:  "Tags" %>
  <% end %>
