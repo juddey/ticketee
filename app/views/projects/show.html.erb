@@ -31,7 +31,7 @@
         <%= text_field_tag "search", params[:search], class: "form-control" %>
         <%= submit_tag "Search", class: "btn btn-default" %>
       <% end %>
-    </li>li>
+    </li>
     <% if policy(Ticket.new(project: @project)).create? %>
       <li><%= link_to "New Ticket",
         new_project_ticket_path(@project),
