@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]   
+  before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   def index
     @projects = policy_scope(Project)
@@ -7,6 +7,7 @@ class ProjectsController < ApplicationController
 
   def show
     authorize @project, :show?
+    @tickets = @project.tickets
   end
 
   def edit
@@ -22,7 +23,7 @@ class ProjectsController < ApplicationController
       flash.now[:alert] = "Project has not been updated."
       render "edit"
     end
-  end   
+  end
 
   private
 
