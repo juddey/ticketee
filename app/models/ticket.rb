@@ -10,10 +10,13 @@ class Ticket < ActiveRecord::Base
   has_many :comments
   attr_accessor :tag_names
   has_and_belongs_to_many :tags, uniq: true
+  has_and_belongs_to_many :watchers, join_table: "ticket_watchers",
+                                     class_name: "User"
 
   accepts_nested_attributes_for :assets, reject_if: :all_blank
 
   before_create :assign_default_state
+  after_create :author_watches_me
 
   searcher do
     label :tag, from: :tags, field: "name"
@@ -30,6 +33,12 @@ class Ticket < ActiveRecord::Base
   private
     def assign_default_state
       self.state = State.default
+    end
+
+    def author_watches_me
+      if author
+        self.watchers << author unless self.watchers.include?(author)
+      end
     end
 
 end

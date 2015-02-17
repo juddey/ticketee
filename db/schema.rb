@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150215212800) do
+ActiveRecord::Schema.define(version: 20150217001553) do
 
   create_table "assets", force: :cascade do |t|
     t.string   "asset"
@@ -78,6 +78,11 @@ ActiveRecord::Schema.define(version: 20150215212800) do
 
   add_index "tags_tickets", ["tag_id", "ticket_id"], name: "index_tags_tickets_on_tag_id_and_ticket_id"
   add_index "tags_tickets", ["ticket_id", "tag_id"], name: "index_tags_tickets_on_ticket_id_and_tag_id"
+
+  create_table "ticket_watchers", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "ticket_id"
+  end
 
   create_table "tickets", force: :cascade do |t|
     t.string   "title"

@@ -3,9 +3,10 @@ class CommentsController < ApplicationController
 
   def create
     whitelisted_params = sanitize_parameters!
-    @comment = @ticket.comments.build(whitelisted_params)
-    @comment.author = current_user
-    authorize @comment, :create?
+    @comment = CommentWithNotifications.create(@ticket.comments,
+                                               current_user,
+                                               whitelisted_params)
+    authorize @comment.comment, :create?
 
     if @comment.save
       flash[:notice] = "Comment has been created."
@@ -13,6 +14,7 @@ class CommentsController < ApplicationController
     else
       flash.now[:alert] = "Comment has not been created."
       @project = @ticket.project
+      @comment = @comment.comment
       render "tickets/show"
     end
   end
