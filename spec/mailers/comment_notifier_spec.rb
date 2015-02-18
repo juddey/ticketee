@@ -30,6 +30,11 @@ RSpec.describe CommentNotifier, :type => :mailer do
       expect(email.body.to_s).to include(title)
       expect(email.body.to_s).to include("#{comment.author.email} wrote:")
       expect(email.body.to_s).to include(comment.text)
-   end
+    end
+
+    it "correctly sets the Reply-To" do
+      address = "myfriend+#{project.id}+#{ticket.id}@example.com"
+      expect(email.reply_to).to eq([address])
+    end
  end
 end
