@@ -60,3 +60,5 @@ group :test do
   gem 'database_cleaner', '~> 1.4.0'
   gem 'email_spec', '~> 1.6.0'
 end
+
+gem 'rails_12factor', group: :production
