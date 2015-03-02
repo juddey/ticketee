@@ -1,6 +1,11 @@
 language: ruby
 rvm: 2.2.0
-script: "bin/rspec"
-before_install:
-  -"export DISPLAY=:99.0"
-  -"sh -e /etc/init.d/xvfb start"
+script: bin/rspec
+before_install: -"export DISPLAY=:99.0" -"sh -e /etc/init.d/xvfb start"
+deploy:
+  provider: heroku
+  api_key:
+    secure: b6rfUK1ZijNLnZIdqWbkz8t8/TC1ENiiSaTW3Wq/g1fNggv7phHs/oU2cLWMKO3YbXoM1swOx8IYEvX9QzLKq3OKxoIIVmGxr8hoZC3y5DjgvDrKPoMtZLda0A/j1aPvCETbL1mfn5drUUU6Wf3xKe5Y1dwgbYclrpEdmB3uOU4=
+  app: safe-forest-7783
+  on:
+    repo: x-light/ticketee
