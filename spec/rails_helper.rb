@@ -57,4 +57,4 @@ end
 #  Capybara::Selenium::Driver.new(app, :browser => :chrome)
 #end
 
-Capybara.javascript_driver = :firefox
+Capybara.javascript_driver = :selenium
