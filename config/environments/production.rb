@@ -75,4 +75,21 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  ActionMailer::Base.delivery_method = :smtp
+
+  host = "safe-forest-7783.herokuapp.com"
+
+  ActionMailer::Base.smtp_settings = {
+    port:           ENV['MAILGUN_SMTP_PORT'],
+    address:        ENV['MAILGUN_SMTP_SERVER'],
+    user_name:      ENV['MAILGUN_SMTP_LOGIN'],
+    password:       ENV['MAILGUN_SMTP_PASSWORD'],
+    domain:         host,
+    authentication: :plain,
+  }
+
+  config.action_mailer.default_url_options = {
+   host: host
+  }
 end
