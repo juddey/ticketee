@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  
+
   has_many :roles
 
   def to_s
@@ -12,5 +12,9 @@ class User < ActiveRecord::Base
 
   def role_on(project)
     roles.find_by(project_id: project).try(:name)
+  end
+
+  def generate_api_key
+    update_column(:api_key, SecureRandom.hex(16))
   end
 end
