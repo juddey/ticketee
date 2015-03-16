@@ -3,6 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'capybara/rspec'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'pundit/rspec'
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -52,11 +53,4 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, type: :controller
 end
 
-
-Capybara.register_driver :chrome do |app|
-  Capybara::Selenium::Driver.new(app, :browser => :chrome)
-end
-
-#Capybara.javascript_driver = :selenium
-Capybara.javascript_driver = :chrome
-
+Capybara.javascript_driver = :selenium
